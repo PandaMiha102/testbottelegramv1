@@ -1,7 +1,9 @@
+import os
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot('6080043043:AAEs6UyOxbRyL_awoBE3aYwPWl6r_PrmrQU')
+bot = telebot.TeleBot(os.environ('BOT_API_KEY'))
+print(os.environ('BOT_API_KEY'))
 
 @bot.message_handler(commands=['start'])
 def start(message):
