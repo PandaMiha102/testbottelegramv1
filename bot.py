@@ -13,7 +13,10 @@ exercises = [
     ('Back.m', 'https://www.youtube.com/watch?v=ni4qZejmb3I'),
     ('Arms.m', 'https://www.youtube.com/watch?v=NsHsuqd-B2Y'),
     ('Legs.m', 'https://www.youtube.com/watch?v=KF6_2hRFtq4'),
-    ('Shoulders.m', 'https://www.youtube.com/watch?v=0N_SmoM3UQc')
+    ('Shoulders.m', 'https://www.youtube.com/watch?v=0N_SmoM3UQc'),
+    ('Chest + Back', 'https://www.youtube.com/watch?v=YMk-AUEjE0k&t=160s'),
+    ('Arms + Shoulders', 'https://www.youtube.com/watch?v=nsqMzucp5xw'),
+    ('Legs + Butt', 'http://surl.li/ivonw')
 ]
 
 for exercise in exercises:
@@ -61,12 +64,10 @@ def get_text_messages(message):
         
     if message.text == 'Жінка':
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True) 
-        btn1 = types.KeyboardButton('Chest.w')
-        btn2 = types.KeyboardButton('Back.w')
-        btn3 = types.KeyboardButton('Arms.w')
-        btn4 = types.KeyboardButton('Legs.w')
-        btn5 = types.KeyboardButton('Shoulders.w')
-        markup.add(btn1, btn2, btn3, btn4, btn5)
+        btn1 = types.KeyboardButton('Chest + Back')
+        btn2 = types.KeyboardButton('Arms + Shoulders')
+        btn3 = types.KeyboardButton('Legs + Butt')
+        markup.add(btn1, btn2, btn3)
         bot.send_message(message.from_user.id, 'Що будемо тренувати?', reply_markup=markup) #ответ бота
     
         
@@ -79,7 +80,7 @@ def get_text_messages(message):
             if exercise[0] == exercise_name:
                 video_link = exercise[1]
                 break
-        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
 
     elif message.text == 'Back.m':
         exercise_name = 'Back.m'
@@ -89,7 +90,7 @@ def get_text_messages(message):
             if exercise[0] == exercise_name:
                 video_link = exercise[1]
                 break
-        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
         
     elif message.text == 'Arms.m':
         exercise_name = 'Arms.m'
@@ -99,7 +100,7 @@ def get_text_messages(message):
             if exercise[0] == exercise_name:
                 video_link = exercise[1]
                 break
-        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
          
     elif message.text == 'Legs.m':
         exercise_name = 'Legs.m'
@@ -109,7 +110,7 @@ def get_text_messages(message):
             if exercise[0] == exercise_name:
                 video_link = exercise[1]
                 break
-        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
           
     elif message.text == 'Shoulders.m':
         exercise_name = 'Shoulders.m'
@@ -119,22 +120,36 @@ def get_text_messages(message):
             if exercise[0] == exercise_name:
                 video_link = exercise[1]
                 break
-        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
                
-    elif message.text == 'Chest.w':
-        bot.send_message(message.from_user.id, '', parse_mode='Markdown')
+    elif message.text == 'Chest + Back':
+        exercise_name = 'Chest + Back'
+        video_link = None
 
-    elif message.text == 'Back.w':
-        bot.send_message(message.from_user.id, '', parse_mode='Markdown')
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
+    elif message.text == 'Arms + Shoulders':
+        exercise_name = 'Arms + Shoulders'
+        video_link = None
+
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown')
         
-    elif message.text == 'Arms.w':
-        bot.send_message(message.from_user.id, '', parse_mode='Markdown')   
-         
-    elif message.text == 'Legs.w':
-        bot.send_message(message.from_user.id, '', parse_mode='Markdown')  
-          
-    elif message.text == 'Shoulders.w':
-        bot.send_message(message.from_user.id, '', parse_mode='Markdown')
+    elif message.text == 'Legs + Butt':
+        exercise_name = 'Legs + Butt'
+        video_link = None
+
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, f"[{video_link}]({video_link})", parse_mode='Markdown') 
         
     
 bot.polling(none_stop=True, interval=0) #обязательная для работы бота часть
