@@ -6,7 +6,20 @@ import sqlite3
 bot = telebot.TeleBot(os.environ.get('BOT_API_KEY'))
 
 conn = sqlite3.connect('database/database.db')
+cursor = conn.cursor()
 
+exercises = [
+    ('Chest.m', 'https://www.youtube.com/watch?v=Vf2evnGKTfo'),
+    ('Back.m', 'https://www.youtube.com/watch?v=ni4qZejmb3I'),
+    ('Arms.m', 'https://www.youtube.com/watch?v=NsHsuqd-B2Y'),
+    ('Legs.m', 'https://www.youtube.com/watch?v=KF6_2hRFtq4'),
+    ('Shoulders.m', 'https://www.youtube.com/watch?v=0N_SmoM3UQc')
+]
+
+for exercise in exercises:
+    cursor.execute("INSERT INTO exercises (muscle_group, video_link) VALUES (?, ?)", exercise)
+    print(cursor)
+    
 @bot.message_handler(commands=['start'])
 def start(message):
 
@@ -59,19 +72,54 @@ def get_text_messages(message):
         
         
     elif message.text == 'Chest.m':
-        bot.send_message(message.from_user.id, '[ссылке](https://www.youtube.com/watch?v=Vf2evnGKTfo)', parse_mode='Markdown')
+        exercise_name = 'Chest.m'
+        video_link = None
+
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
 
     elif message.text == 'Back.m':
-        bot.send_message(message.from_user.id, '[ссылке](https://www.youtube.com/watch?v=ni4qZejmb3I)', parse_mode='Markdown')
+        exercise_name = 'Back.m'
+        video_link = None
+
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
         
     elif message.text == 'Arms.m':
-        bot.send_message(message.from_user.id, '[ссылке](https://www.youtube.com/watch?v=NsHsuqd-B2Y)', parse_mode='Markdown')   
+        exercise_name = 'Arms.m'
+        video_link = None
+        
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
          
     elif message.text == 'Legs.m':
-        bot.send_message(message.from_user.id, '[ссылке](https://www.youtube.com/watch?v=KF6_2hRFtq4)', parse_mode='Markdown')  
+        exercise_name = 'Legs.m'
+        video_link = None
+        
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
           
     elif message.text == 'Shoulders.m':
-        bot.send_message(message.from_user.id, '[ссылке](https://www.youtube.com/watch?v=0N_SmoM3UQc)', parse_mode='Markdown') 
+        exercise_name = 'Shoulders.m'
+        video_link = None
+
+        for exercise in exercises:
+            if exercise[0] == exercise_name:
+                video_link = exercise[1]
+                break
+        bot.send_message(message.from_user.id, video_link, parse_mode='Markdown')
                
     elif message.text == 'Chest.w':
         bot.send_message(message.from_user.id, '', parse_mode='Markdown')
